@@ -1,7 +1,8 @@
 function register() {
   let register_form = document.getElementById('register_form');
   let nicknameInput = document.getElementById('nickname');
-  let passwordInput = document.getElementById('password');
+  let password1Input = document.getElementById('password1');
+  let password2Input = document.getElementById('password2');
   register_form.addEventListener('submit', function (event) {
     event.preventDefault();
 
@@ -11,12 +12,23 @@ function register() {
       return alert('用户名不能为空');
     }
 
-    let password = passwordInput.value.trim();
-    if (!password) {
+    let password1 = password1Input.value.trim();
+    if (!password1) {
       return alert('密码不能为空');
     }
+
+    let password2 = password2Input.value.trim();
+    if (!password1) {
+      return alert('密码不能为空');
+    }
+
+    if(password1!=password2){
+      return alert('输入的密码不同');
+    }
+    let password = password1;
+    
     let avatar = 'http://localhost:1625/images/1.jpg';
-    console.log(nickname, password, avatar);
+    console.log(nickname, password1, avatar);
 
     axios.post('/register', {
       nickname,

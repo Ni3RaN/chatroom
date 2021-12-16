@@ -5,7 +5,7 @@ let router = express.Router();
 
 router.get('/', function (req, res) {
     let user = req.session.user;
-    console.log('是否登陆：', user);
+    console.log('是否登录：', user);
     if (user) {
         res.render('index.html', {
             user
@@ -19,6 +19,7 @@ router.get('/', function (req, res) {
 // 聊天界面
 router.get('/index', function (req, res) {
     let user = req.session.user;
+    console.log('是否登录：', user);
     if (user) {
         res.render('index.html', {
             user
@@ -62,7 +63,7 @@ router.get('/register', function (req, res) {
 // 处理注册请求
 router.post('/register', async function (req, res) {
     let body = req.body;
-    console.log('用户请求注册：',body);
+    console.log('用户请求注册：', body);
     let result = await User.findOne({
         nickname: body.nickname,
     });
@@ -81,5 +82,13 @@ router.post('/register', async function (req, res) {
     })
 });
 
+// 退出登录的请求
+router.post('/logout', function (req, res) {
+    req.session.user = null;
+    return res.status(200).json({
+        err_code: 0,
+        message: "已退出"
+    })
+});
 
 module.exports = router;

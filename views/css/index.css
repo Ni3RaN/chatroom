@@ -421,18 +421,5 @@ body {
     cursor: pointer;
     outline: none;
   }
-  .btn_mine{
-    color: #333;
-    padding:  3px 5px;
-    font-size: 13px;
-    margin-right: 8px;
-    margin-top: 0px;
-  }
-  .btn_send{
-    padding:  0px 5px;
-    font-size: 12px;
-    margin-right: 10px;
-    margin-top: 0px;
-  }
 
     

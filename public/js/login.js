@@ -28,7 +28,8 @@ login_form.addEventListener('submit', function (event) {
       };
       sessionStorage.setItem('currentUser', JSON.stringify(user));
       location.href = '/index';
-    } else if (err_code === 1) {
+    } 
+    else if (err_code === 1) {
       alert('昵称或密码错误');
     }
   })
