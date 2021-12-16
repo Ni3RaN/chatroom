@@ -1,5 +1,5 @@
 // 1. 连接socket.io服务
-let socket = io('http://localhost:1625');
+let socket = io(window.document.location.host);
 
 // 聊天框
 let chatContainer = document.querySelector(".chat-container");

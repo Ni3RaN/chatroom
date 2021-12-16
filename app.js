@@ -33,7 +33,7 @@ let users = [];
 app.use(router);
 
 server.listen(1625, function () {
-    console.log('http://127.0.0.1:1625');
+    console.log('在1625端口上启动');
 });
 
 // 只要有用户连接，就会触发connection事件，并为每个用户创建独一无二的连接socket（也就是socket对象是每个用户都有的）
