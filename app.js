@@ -11,7 +11,6 @@ let router = require('./router');
 // 配置解析表单 POST请求体插件（注意:一定要在 app.use(router)之前)
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(express.static('./public'));
 
 // 配置使用art-template
 app.engine('html', require('express-art-template'));
@@ -22,15 +21,20 @@ app.use(session({
     saveUninitialized: true
 }));
 
+app.get('/',function(req,res){
+    res.redirect('/index');
+});
+
+app.use('/',express.static('./public'));
 // 记录所有已经登录的用户
 let users = [];
+
 
 app.use(router);
 
 server.listen(1625, function () {
     console.log('http://127.0.0.1:1625');
 });
-
 
 // 只要有用户连接，就会触发connection事件，并为每个用户创建独一无二的连接socket（也就是socket对象是每个用户都有的）
 io.on('connection', function (socket) {
