@@ -1,0 +1,32 @@
+{
+  "name": "chatroom",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ni3RaN/chatroom.git"
+  },
+  "keywords": [
+    "nodejs"
+  ],
+  "author": "NieRaN",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ni3RaN/chatroom/issues"
+  },
+  "homepage": "https://github.com/Ni3RaN/chatroom#readme",
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "express": "^4.17.1",
+    "express-art-template": "^1.0.1",
+    "express-session": "^1.17.2",
+    "mongo": "^0.1.0",
+    "nodejs-websocket": "^1.7.2",
+    "socket.io": "^4.4.0",
+    "weui": "^2.5.4"
+  }
+}

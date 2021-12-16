@@ -1,0 +1,28 @@
+@import 'fn';
+
+body {
+    .varsLight();
+}
+
+@media (prefers-color-scheme: dark) {
+    body:not([data-weui-theme='light']) {
+        .varsDark();
+    }
+}
+body[data-weui-theme='dark'] {
+    .varsDark();
+}
+
+
+body[data-weui-mode='care'] {
+    .varsCareLight();
+}
+
+@media (prefers-color-scheme: dark) {
+    body[data-weui-mode='care']:not([data-weui-theme='light']) {
+        .varsCareDark();
+    }
+}
+body[data-weui-mode='care'][data-weui-theme='dark'] {
+    .varsCareDark();
+}

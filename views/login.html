@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+  <title>用户登录</title>
+  <!-- 引入 WeUI -->
+  <link rel="stylesheet" href="css/weui.min.css" />
+</head>
+
+<body>
+  <!-- 使用 -->
+  <div class="page">
+    <div class="weui-form">
+      <div class="weui-form__text-area">
+        <h2 class="weui-form__title">用户登录</h2>
+      </div>
+      <div class="weui-form__control-area">
+        <div class="weui-cells__group weui-cells__group_form">
+          <div class="weui-cells">
+            <form id="login_form">
+              <label for="nickname" class="weui-cell weui-cell_active">
+                <div class="weui-cell__hd"><span class="weui-label">昵称</span></div>
+                <div class="weui-cell__bd">
+                  <input class="weui-input" id="nickname" type="text" name="nickname" placeholder="昵称" />
+                </div>
+              </label>
+              <label for="password" class="weui-cell weui-cell_active">
+                <div class="weui-cell__hd"><span class="weui-label">密码</span></div>
+                <div class="weui-cell__bd">
+                  <input class="weui-input" id="password" type="password" name="pasword" placeholder="密码" />
+                </div>
+              </label>
+              <div class="weui-form__tips-area">
+              </div>
+              <div class="weui-form__opr-area">
+                <button type="submit" class="weui-btn weui-btn_primary">登录</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="weui-form__tips-area">
+        <p class="weui-form__tips">
+          没有账号?
+          <a href="/register">点击注册</a>
+        </p>
+      </div>
+      <div class="weui-form__extra-area">
+        <div class="weui-footer">
+          <p class="weui-footer__text">Copyright © 2008-2019 weui.io</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+  <script src="js/login.js"></script>
+</body>
+
+</html>

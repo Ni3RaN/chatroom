@@ -1,0 +1,70 @@
+@import 'vars/light';
+@import 'vars/dark';
+@import 'vars/care-light';
+@import 'vars/care-dark';
+
+.dark(@rule) {
+    body[data-weui-theme='dark'] & {
+        @rule();
+    }
+
+    @media (prefers-color-scheme: dark) {
+        body:not([data-weui-theme='light']) & {
+            @rule();
+        }
+    }
+}
+.setColor(@var, @color) {
+    .setColor(@var, @color, @color);
+}
+.setColor(@var, @light, @dark) {
+    ._setColor({
+        @{var}: @light;
+    }, {
+        @{var}: @dark;
+    });
+}
+._setColor(@lightRule, @darkRule) {
+    body {
+        @lightRule();
+    }
+    body[data-weui-theme='dark'] {
+        @darkRule();
+    }
+
+    @media (prefers-color-scheme: dark) {
+        body:not([data-weui-theme='light']) {
+            @darkRule();
+        }
+    }
+}
+
+.care(@rule) {
+    body[data-weui-mode='care'] & {
+        @rule();
+    }
+}
+.setCareColor(@var, @color) {
+    .setCareColor(@var, @color, @color);
+}
+.setCareColor(@var, @light, @dark) {
+    ._setCareColor({
+        @{var}: @light;
+    }, {
+        @{var}: @dark;
+    });
+}
+._setCareColor(@lightRule, @darkRule) {
+    body[data-weui-mode='care'] {
+        @lightRule();
+    }
+    body[data-weui-mode='care'][data-weui-theme='dark'] {
+        @darkRule();
+    }
+
+    @media (prefers-color-scheme: dark) {
+        body[data-weui-mode='care']:not([data-weui-theme='light']) {
+            @darkRule();
+        }
+    }
+}
