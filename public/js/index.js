@@ -6,6 +6,17 @@ let chatContainer = document.querySelector(".chat-container");
 
 // 如果直接进入该页面，判断当前用户是否登录成功。如果登录成功，就发一个事件给服务器，服务器做一个广播
 let currentUser = sessionStorage.getItem('currentUser');
+
+
+let user_list = document.getElementById('user-list');
+
+
+//适配移动端
+if (navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)) {
+    user_list.remove();
+}
+
+
 if (currentUser) {
     console.log('登录成功');
     currentUser = JSON.parse(currentUser);
@@ -20,30 +31,29 @@ socket.on('addUser', function (user) {
     chatContainer.appendChild(p);
     scrollIntoView(chatContainer);
 });
-
 // 监听用户列表的消息
 socket.on('userList', function (users) {
-    // 把userList的数据动态渲染到左侧用户列表
-    let friendsList = document.querySelector('.friends-list');
-    friendsList.innerHTML = '';
-    let html = '';
-    for (let i = 0; i < users.length; i++) {
-        let user = users[i];
-        if (user.nickname === currentUser.nickname) {
-            continue;
-        }
-        html += `      
+    if (!navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)) {
+        // 把userList的数据动态渲染到左侧用户列表
+        let friendsList = document.querySelector('.friends-list');
+        friendsList.innerHTML = '';
+        let html = '';
+        for (let i = 0; i < users.length; i++) {
+            let user = users[i];
+            if (user.nickname === currentUser.nickname) {
+                continue;
+            }
+            html += `      
       <div class="user-info">
         <img src="${user.avatar}" class="avatarImg">
         <span>${user.nickname}</span>
       </div>`;
+        }
+        friendsList.innerHTML += html;
     }
-    friendsList.innerHTML += html;
-
     // 修改聊天室的用户总数
     document.getElementById('userCount').textContent = users.length;
 });
-
 // 监听用户离开的消息
 socket.on('userLeave', function (user) {
     let p = document.createElement('p');
@@ -172,6 +182,13 @@ function logout() {
     })
 }
 
-sendMessage();
-emoji();
-logout();
+//适配移动端
+if (navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)) {
+    sendMessage();
+    emoji();
+}
+else {
+    sendMessage();
+    emoji();
+    logout();
+}

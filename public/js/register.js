@@ -3,6 +3,7 @@ function register() {
   let nicknameInput = document.getElementById('nickname');
   let password1Input = document.getElementById('password1');
   let password2Input = document.getElementById('password2');
+  let hostname = 'http://' + window.document.location.host;
   btn_register.onclick = function (event) {
     event.preventDefault();
 
@@ -27,7 +28,7 @@ function register() {
     }
     let password = password1;
     
-    let avatar = 'http://localhost:1625/images/1.jpg';
+    let avatar = hostname + '/images/1.jpg';
     console.log(nickname, password1, avatar);
 
     axios.post('/register', {
