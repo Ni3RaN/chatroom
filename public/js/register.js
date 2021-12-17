@@ -1,9 +1,9 @@
 function register() {
-  let register_form = document.getElementById('register_form');
+  let btn_register = document.getElementById('btn_register');
   let nicknameInput = document.getElementById('nickname');
   let password1Input = document.getElementById('password1');
   let password2Input = document.getElementById('password2');
-  register_form.addEventListener('submit', function (event) {
+  btn_register.onclick = function (event) {
     event.preventDefault();
 
     // 获取用户名、密码和头像地址
@@ -42,7 +42,7 @@ function register() {
         alert('昵称已存在，请重新填写')
       }
     })
-  });
+  };
 }
 
 register();

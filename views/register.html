@@ -7,19 +7,20 @@
     <title>用户注册</title>
     <!-- 引入 WeUI -->
     <link rel="stylesheet" href="css/weui.min.css" />
+    <link rel="stylesheet" href="css/register.css">
 </head>
 
 <body>
     <!-- 使用 -->
     <div class="page">
-        <div class="weui-form">
-            <div class="weui-form__text-area">
-                <h2 class="weui-form__title">用户注册</h2>
-            </div>
-            <div class="weui-form__control-area">
-                <div class="weui-cells__group weui-cells__group_form">
-                    <div class="weui-cells">
-                        <form id="register_form">
+        <div class="container">
+            <div class="weui-form">
+                <div class="weui-form__text-area">
+                    <h2 class="weui-form__title">用户注册</h2>
+                </div>
+                <div class="weui-form__control-area">
+                    <div class="weui-cells__group weui-cells__group_form">
+                        <div class="weui-cells">
                             <label for="nickname" class="weui-cell weui-cell_active">
                                 <div class="weui-cell__hd"><span class="weui-label">昵称</span></div>
                                 <div class="weui-cell__bd">
@@ -41,24 +42,24 @@
                                         placeholder="确认密码" />
                                 </div>
                             </label>
-                            <div class="weui-form__tips-area">
-                            </div>
-                            <div class="weui-form__opr-area">
-                                <button type="submit" class="weui-btn weui-btn_primary">注册</a>
-                            </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="weui-form__tips-area">
-                <p class="weui-form__tips">
-                    已有账号?
-                    <a href="/login">点击登录</a>
-                </p>
-            </div>
-            <div class="weui-form__extra-area">
-                <div class="weui-footer">
-                    <p class="weui-footer__text">Copyright © NieRaN</p>
+                <div class="weui-form__tips-area">
+                </div>
+                <div class="weui-form__opr-area">
+                    <button type="submit" class="weui-btn weui-btn_primary" id="btn_register">注册</a>
+                </div>
+                <div class="weui-form__tips-area">
+                    <p class="weui-form__tips">
+                        已有账号?
+                        <a href="/login">点击登录</a>
+                    </p>
+                </div>
+                <div class="weui-form__extra-area">
+                    <div class="weui-footer">
+                        <p class="weui-footer__text">Copyright © NieRaN</p>
+                    </div>
                 </div>
             </div>
         </div>

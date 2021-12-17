@@ -1,7 +1,7 @@
-let login_form = document.getElementById('login_form');
+let btn_login = document.getElementById('btn_login');
 let nicknameInput = document.getElementById('nickname');
 let passwordInput = document.getElementById('password');
-login_form.addEventListener('submit', function (event) {
+btn_login.onclick = function (event) {
   event.preventDefault();
 
   // 获取用户名、密码和头像地址
@@ -33,5 +33,5 @@ login_form.addEventListener('submit', function (event) {
       alert('昵称或密码错误');
     }
   })
-});
+};
 
