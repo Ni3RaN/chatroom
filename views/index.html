@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>聊天室</title>
@@ -8,54 +9,49 @@
   <link rel="stylesheet" media="screen and (max-device-width:640px)" href="css/index-mobile.css" type="text/css" />
   <link rel="stylesheet" media="screen and (min-device-width:640px)" href="css/index.css" type="text/css" />
 </head>
+
 <body>
-
-<!--聊天界面-->
-<div class="chatContainer">
-  <!-- 左侧用户列表 -->
-  <div class="user-list" id="user-list">
-    <div class="current-user">
-      <p class="header-title">
-        <span>当前用户</span>
-      </p>
-      <div class="current-user-info">
-        <div style="display: flex;align-items: center">
-          <img src="{{user.avatar}}" class="avatarImg" id="userAvatarImg">
-          <span id="currentNickname">{{user.nickname}}</span>
+  <!--聊天界面-->
+  <div class="chatContainer">
+    <!-- 左侧用户列表 -->
+    <div class="user-list" id="user-list">
+      <div class="current-user">
+        <p class="header-title">
+          <span>当前用户</span>
+        </p>
+        <div class="current-user-info">
+          <div style="display: flex;align-items: center">
+            <img src="{{user.avatar}}" class="avatarImg" id="userAvatarImg">
+            <span id="currentNickname">{{user.nickname}}</span>
+          </div>
+          <a href="/changeAvatar" class="weui-btn weui-btn_default weui-btn_mini btn_mine">修改头像</a>
         </div>
-        <a href="/changeAvatar" class="weui-btn weui-btn_default weui-btn_mini btn_mine">修改头像</a>
+
       </div>
-
+      <p class="header-title">朋友列表</p>
+      <div class="friends-list">
+      </div>
     </div>
-    <p class="header-title">朋友列表</p>
-    <div class="friends-list">
-    </div>
-  </div>
 
-  <!-- 右侧聊天界面 -->
-  <div class="chat-room">
-    <p class="title">聊天室(<span id="userCount">99</span>)
-      <!-- <i class="layui-icon btn_logout layui-icon-close" id="logout"></i>   -->
-      <a id="device-icon"></a>
-    </p> 
-    <div class="chat-container"></div>
-    <div class="menus" id="menus">
-      <!-- <div class="inputContainer">
-        <div id="textareaMsg" class="contentEdit" contenteditable></div>
-        <div class="sendContainer">
-          <span class="sendTip">按下Ctrl+Enter发送，Enter换行</span>
-          <button class="weui-btn weui-btn_primary weui-btn_mini btn_send" id="sendBtn">发送</button>
-        </div>
-      </div> -->
+    <!-- 右侧聊天界面 -->
+    <div class="chat-room">
+      <p class="title">聊天室(<span id="userCount">99</span>)
+        <a id="device-icon">
+          <!-- 返回图标 -->
+        </a>
+      </p>
+      <div class="chat-container"></div>
+      <div class="menus" id="menus">
+        <!-- 聊天框 -->
+      </div>
     </div>
   </div>
-</div>
-
-<!--引入socket.io-->
-<script src="/socket.io/socket.io.js"></script>
-<script src="//unpkg.com/layui@2.6.8/dist/layui.js"></script>
-<script src="js/jquery-3.5.1.js"></script>
-<script src="js/jquery.emoji.js"></script>
-<script src="js/index.js"></script>
+  <!--引入socket.io-->
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="//unpkg.com/layui@2.6.8/dist/layui.js"></script>
+  <script src="js/jquery-3.5.1.js"></script>
+  <script src="js/jquery.emoji.js"></script>
+  <script src="js/index.js"></script>
 </body>
+
 </html>

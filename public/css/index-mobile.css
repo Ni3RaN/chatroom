@@ -3,6 +3,11 @@ html,body{
     width: 100%;
 }
 
+body{
+    background-color: var(--weui-BG-0);
+}
+
+
 .chatContainer{
     margin: auto;
     display: flex;
@@ -33,7 +38,7 @@ html,body{
     line-height: 100px;
     text-align: center;
     border-bottom: 1px solid #ccc;
-    font-size: xx-large;
+    font-size: 35px;
 }
 
 .menus{
@@ -116,15 +121,15 @@ html,body{
 }
 
 .mobile_textarea {
-    font-size: xxx-large;
+    font-size: 50px;
 }
 
 .sendBtn{
-    font-size: xxx-large;
+    font-size: 50px
 }
 
 .btn_logout{
-    font-size: xxx-large;
+    font-size: 50px;
     float: left;
     margin: auto;
 }
