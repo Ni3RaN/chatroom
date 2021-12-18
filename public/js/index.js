@@ -10,10 +10,37 @@ let currentUser = sessionStorage.getItem('currentUser');
 
 let user_list = document.getElementById('user-list');
 
+let device_icon = document.getElementById('device-icon');
+
+let menus = document.getElementById('menus');
 
 //适配移动端
 if (navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)) {
     user_list.remove();
+    device_icon.innerHTML += "<i class='layui-icon layui-icon-left btn_logout' id='logout'></i>";
+    let html = `
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell weui-cell_active">
+                <div class="weui-cell__bd">
+                    <textarea class="weui-textarea mobile_textarea" id="textareaMsg" rows="1"></textarea>
+                </div>
+                <i class="layui-icon layui-icon-release sendBtn" id="sendBtn"></i>
+            </div>
+        </div>
+    `;
+    menus.innerHTML += html;
+}
+else {
+    device_icon.innerHTML += "<i class='layui-icon layui-icon-close btn_logout' id='logout'></i>";
+    let html = `
+        <div class="inputContainer">
+            <div id="textareaMsg" class="contentEdit" contenteditable></div>
+            <div class="sendContainer">
+                <span class="sendTip">按下Ctrl+Enter发送，Enter换行</span>
+                <button class="weui-btn weui-btn_primary weui-btn_mini btn_send" id="sendBtn">发送</button>
+            </div>
+        </div>`;
+    menus.innerHTML += html;
 }
 
 
@@ -50,6 +77,7 @@ socket.on('userList', function (users) {
       </div>`;
         }
         friendsList.innerHTML += html;
+
     }
     // 修改聊天室的用户总数
     document.getElementById('userCount').textContent = users.length;
@@ -95,8 +123,9 @@ socket.on('receiveMessage', function (data) {
 
 // 获取用户输入的内容
 function getMessage(element) {
-    let value = element.innerHTML;
-    element.innerHTML = '';
+    let value = element.value;
+    // console.log(textareaMsg);
+    element.value = '';
     if (!value) {
         return alert('消息不能为空');
     }
@@ -112,7 +141,6 @@ function getMessage(element) {
 function sendMessage() {
     let sendBtn = document.getElementById('sendBtn');
     let textareaMsg = document.getElementById('textareaMsg');
-
     sendBtn.addEventListener('click', function () {
         getMessage(textareaMsg);
     });
@@ -129,46 +157,6 @@ function scrollIntoView(element) {
     element.lastElementChild.scrollIntoView(false);
 }
 
-// 初始化jquery-emoji插件
-function emoji() {
-    let emojiBtn = document.getElementById('emojiBtn');
-    emojiBtn.addEventListener('click', function () {
-        $('#textareaMsg').emoji({
-            button: '#emojiBtn',// 设置触发表情的按钮
-            showTab: false,
-            animation: "slide",
-            position: "topRight",
-            icons: [
-                {
-                    name: "QQ表情",
-                    path: "images/qq/",
-                    maxNum: 91,
-                    excludeNums: [41, 45, 54],
-                    file: ".gif",
-                    placeholder: "#qq_{alias}#"
-                },
-                {
-                    name: "emoji",
-                    path: "images/emoji/",
-                    maxNum: 84,
-                    excludeNums: [41, 45, 54],
-                    file: ".png",
-                    placeholder: "#emoji_{alias}#"
-                },
-                {
-                    name: "贴吧表情",
-                    path: "images/tieba/",
-                    maxNum: 50,
-                    excludeNums: [41, 45, 54],
-                    file: ".jpg",
-                    placeholder: "#tieba{alias}#"
-                }
-            ]
-        })
-    });
-
-}
-
 function logout() {
     let logout = document.getElementById('logout');
     console.log('logout');
@@ -182,13 +170,5 @@ function logout() {
     })
 }
 
-//适配移动端
-if (navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)) {
-    sendMessage();
-    emoji();
-}
-else {
-    sendMessage();
-    emoji();
-    logout();
-}
+sendMessage();
+logout();

@@ -250,8 +250,8 @@ body {
   }
   
   .sendMsg .avatarImg {
-    /*position: relative;*/
-    /*top: -15px;*/
+    position: relative;
+    top: -15px;
   }
   
   .sendMsg .avatarImg,
@@ -392,7 +392,7 @@ body {
     outline: none;
     margin-top: 10px;
     font-size: 15px;
-    height: 70px;
+    height: 115px;
     overflow: auto;
   }
   
@@ -435,4 +435,8 @@ body {
     margin-top: 0px;
   }
 
-    
+.btn_logout{
+  font-size: large;
+  float: right;
+  margin: auto;
+}
