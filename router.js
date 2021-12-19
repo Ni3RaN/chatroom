@@ -82,6 +82,22 @@ router.post('/register', async function (req, res) {
     })
 });
 
+router.get('/info',function(req,res){
+    let user = req.session.user;
+    if(user){
+        res.render('info.html',{
+            user
+        });
+    }
+    else{
+        res.redirect('/login');
+    }
+});
+
+router.post('/info',async function(req,res){
+
+});
+
 // 退出登录的请求
 router.post('/logout', function (req, res) {
     req.session.user = null;

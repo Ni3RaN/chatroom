@@ -17,24 +17,26 @@ let menus = document.getElementById('menus');
 //适配移动端
 if (navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)) {
     user_list.remove();
-    device_icon.innerHTML += "<i class='layui-icon layui-icon-left btn_logout' id='logout'></i>";
+    device_icon.innerHTML += `
+    <i class="layui-icon layui-icon-left btn_logout" id="logout"></i>
+    <i class="layui-icon layui-icon-more btn_mine" id="infoChange"></i>
+    `;
     let html = `
         <div class="weui-cells weui-cells_form">
             <div class="weui-cell weui-cell_active">
                 <div class="weui-cell__bd">
-                    <textarea class="weui-textarea mobile_textarea" id="textareaMsg" rows="1"></textarea>
+                    <textarea class="weui-textarea mobile_textarea weui-input" id="textareaMsg" rows="1"></textarea>
                 </div>
                 <i class="layui-icon layui-icon-release sendBtn" id="sendBtn"></i>
             </div>
         </div>
     `;
     menus.innerHTML += html;
-}
-else {
+} else {
     device_icon.innerHTML += "<i class='layui-icon layui-icon-close btn_logout' id='logout'></i>";
     let html = `
         <div class="inputContainer">
-            <div id="textareaMsg" class="contentEdit" contenteditable></div>
+            <div id="textareaMsg" class="contentEdit  weui-input" contenteditable></div>
             <div class="sendContainer">
                 <span class="sendTip">按下Ctrl+Enter发送，Enter换行</span>
                 <button class="weui-btn weui-btn_primary weui-btn_mini btn_send" id="sendBtn">发送</button>
@@ -51,7 +53,7 @@ if (currentUser) {
 }
 
 // 监听添加用户的消息
-socket.on('addUser', function (user) {
+socket.on('addUser', function(user) {
     let p = document.createElement('p');
     p.classList.add('tip');
     p.textContent = user.nickname + '进入了聊天室';
@@ -59,7 +61,7 @@ socket.on('addUser', function (user) {
     scrollIntoView(chatContainer);
 });
 // 监听用户列表的消息
-socket.on('userList', function (users) {
+socket.on('userList', function(users) {
     if (!navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)) {
         // 把userList的数据动态渲染到左侧用户列表
         let friendsList = document.querySelector('.friends-list');
@@ -83,16 +85,16 @@ socket.on('userList', function (users) {
     document.getElementById('userCount').textContent = users.length;
 });
 // 监听用户离开的消息
-socket.on('userLeave', function (user) {
+socket.on('userLeave', function(user) {
     let p = document.createElement('p');
-    p.classList.add('tip');
+    p.classList.add('weui-form__tips tips');
     p.textContent = user.nickname + '离开了聊天室';
     chatContainer.appendChild(p);
     scrollIntoView(chatContainer);
 });
 
 // 监听用户发送文本内容
-socket.on('receiveMessage', function (data) {
+socket.on('receiveMessage', function(data) {
     // 把接收到的消息显示到聊天窗口中，需要区分这个消息是自己的还是其他人发的
     let sendUser = data.sendUser;
     let html = '';
@@ -123,9 +125,15 @@ socket.on('receiveMessage', function (data) {
 
 // 获取用户输入的内容
 function getMessage(element) {
-    let value = element.value;
+    let value = '';
+    if (navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)) {
+        value = element.value;
+        element.value = '';
+    } else {
+        value = element.innerHTML;
+        element.innerHTML = '';
+    }
     // console.log(textareaMsg);
-    element.value = '';
     if (!value) {
         return alert('消息不能为空');
     }
@@ -141,11 +149,11 @@ function getMessage(element) {
 function sendMessage() {
     let sendBtn = document.getElementById('sendBtn');
     let textareaMsg = document.getElementById('textareaMsg');
-    sendBtn.addEventListener('click', function () {
+    sendBtn.addEventListener('click', function() {
         getMessage(textareaMsg);
     });
 
-    textareaMsg.addEventListener('keydown', function (event) {
+    textareaMsg.addEventListener('keydown', function(event) {
         if (event.key === 'Enter' && event.ctrlKey) {
             getMessage(textareaMsg);
         }
@@ -160,9 +168,9 @@ function scrollIntoView(element) {
 function logout() {
     let logout = document.getElementById('logout');
     console.log('logout');
-    logout.addEventListener('click', function () {
+    logout.addEventListener('click', function() {
         let xhr = new XMLHttpRequest();
-        xhr.onload = function () {
+        xhr.onload = function() {
             location.href = '/login';
         };
         xhr.open('POST', '/logout');
@@ -170,5 +178,15 @@ function logout() {
     })
 }
 
+function infoChange() {
+    let infoChange = document.getElementById('infoChange');
+    infoChange.addEventListener('click', function() {
+        location.href = '/info';
+    });
+}
+
 sendMessage();
+if (navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)) {
+    infoChange();
+}
 logout();
