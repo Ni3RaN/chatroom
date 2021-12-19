@@ -40,6 +40,7 @@ body {
     border-bottom: 1px solid #ccc;
     font-size: 35px;
     color: var(--weui-FG-0);
+    font-weight: 500;
 }
 
 .menus {
@@ -90,16 +91,18 @@ body {
 .nickname {
     font-size: 30px;
     margin-bottom: 5px;
+    color: var(--weui-FG-0);
 }
 
 .receiveContent {
     position: relative;
     padding: 5px 10px;
-    background-color: #fff;
+    background-color: var(--weui-BG-3);
     border-radius: 2px;
     font-size: xx-large;
     max-width: 200px;
     word-break: break-all;
+    color: var(--weui-FG-0);
 }
 
 .sendMsg {
@@ -114,7 +117,7 @@ body {
     top: -10px;
     padding: 5px 10px;
     border-radius: 2px;
-    background-color: rgb(179, 224, 129);
+    background-color: var(--weui-LIGHTGREEN);
     display: inline-block;
     max-width: 200px;
     text-align: left;
@@ -128,19 +131,24 @@ body {
 }
 
 .sendBtn {
-    font-size: 50px
+    font-size: 50px;
+    color: var(--weui-FG-0);
 }
 
 .btn_logout {
+    font-weight: 300;
     font-size: 50px;
     float: left;
     margin: auto;
     margin-left: 20px;
+    color: var(--weui-FG-0);
 }
 
 .btn_mine {
+    font-weight: 100;
     font-size: 50px;
     float: right;
     margin: auto;
     margin-right: 20px;
+    color: var(--weui-FG-0);
 }

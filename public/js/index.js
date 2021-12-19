@@ -128,6 +128,8 @@ function getMessage(element) {
     let value = '';
     if (navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)) {
         value = element.value;
+        value = value.replace(/\n/g, "<br/>").replace(/\s/g, " ");
+        // console.log(value)
         element.value = '';
     } else {
         value = element.innerHTML;

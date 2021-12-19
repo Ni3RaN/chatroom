@@ -208,7 +208,8 @@ body {
     position: relative;
     width: 700px;
     height: 645px;
-    background-color: rgb(236, 236, 236);
+    background-color: var(--weui-BG-0);
+    color: var(--weui-FG-0);
 }
 
 .title {
@@ -221,6 +222,7 @@ body {
     text-align: center;
     /*padding: 0 20px;*/
     border-bottom: 1px solid #ccc;
+    font-weight: 400;
 }
 
 .chat-container {
@@ -276,12 +278,13 @@ body {
     top: -10px;
     padding: 5px 10px;
     border-radius: 2px;
-    background-color: rgb(179, 224, 129);
+    background-color: var(--weui-LIGHTGREEN);
     display: inline-block;
     max-width: 200px;
     text-align: left;
     font-size: 15px;
     word-break: break-all;
+    color: black;
 }
 
 .sendContent:after {
@@ -341,7 +344,7 @@ body {
 .receiveContent {
     position: relative;
     padding: 5px 10px;
-    background-color: #fff;
+    background-color: var(--weui-BG-3);
     border-radius: 2px;
     font-size: 15px;
     max-width: 200px;
@@ -406,7 +409,7 @@ body {
 }
 
 .inputContainer .contentEdit {
-    background-color: rgb(236, 236, 236);
+    background-color: var (--weui-BG-0);
     border: none;
     outline: none;
     margin-top: 10px;
@@ -457,6 +460,7 @@ body {
 }
 
 .btn_logout {
+    color: var(--weui-FG-0);
     font-size: large;
     float: right;
     margin: auto;

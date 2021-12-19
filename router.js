@@ -3,40 +3,38 @@ let User = require('./models/User');
 
 let router = express.Router();
 
-router.get('/', function (req, res) {
+router.get('/', function(req, res) {
     let user = req.session.user;
     console.log('是否登录：', user);
     if (user) {
         res.render('index.html', {
             user
         });
-    }
-    else {
+    } else {
         res.redirect('/login');
     }
 });
 
 // 聊天界面
-router.get('/index', function (req, res) {
+router.get('/index', function(req, res) {
     let user = req.session.user;
     console.log('是否登录：', user);
     if (user) {
         res.render('index.html', {
             user
         });
-    }
-    else {
+    } else {
         res.redirect('/login');
     }
 });
 
 // 登录页面
-router.get('/login', function (req, res) {
+router.get('/login', function(req, res) {
     res.render('login.html');
 });
 
 // 处理登录请求
-router.post('/login', async function (req, res) {
+router.post('/login', async function(req, res) {
     let body = req.body;
     console.log('用户请求登录：', body);
     let user = await User.findOne(body);
@@ -56,12 +54,12 @@ router.post('/login', async function (req, res) {
 });
 
 // 注册页面
-router.get('/register', function (req, res) {
+router.get('/register', function(req, res) {
     res.render('register.html');
 });
 
 // 处理注册请求
-router.post('/register', async function (req, res) {
+router.post('/register', async function(req, res) {
     let body = req.body;
     console.log('用户请求注册：', body);
     let result = await User.findOne({
@@ -79,27 +77,60 @@ router.post('/register', async function (req, res) {
     // req.session.user = user;
     return res.status(200).json({
         err_code: 0,
-    })
+    });
 });
 
-router.get('/info',function(req,res){
+router.get('/info', function(req, res) {
     let user = req.session.user;
-    if(user){
-        res.render('info.html',{
+    if (user) {
+        res.render('info.html', {
             user
         });
-    }
-    else{
+    } else {
         res.redirect('/login');
     }
 });
 
-router.post('/info',async function(req,res){
+router.post('/info', async function(req, res) {
+    let body = req.body;
+    let user = req.session.user;
 
+    console.log('用户请求更新信息：', body);
+
+    let result = await User.findOne({
+        nickname: body.nickname,
+    });
+
+    if (result && body.nickname != user.nickname) {
+        return res.status(200).json({
+            err_code: 1,
+            message: '昵称已存在'
+        });
+    }
+
+    User.remove({ nickname: user.nickname }, function(err, res) {
+        if (res) {
+            console.log('删除成功');
+        }
+    });
+
+    user = new User({
+        nickname: body.nickname,
+        password: body.password,
+        avatar: body.avatar
+    });
+
+    await user.save();
+
+    req.session.user = user;
+    return res.status(200).json({
+        err_code: 0,
+        message: '修改成功'
+    });
 });
 
 // 退出登录的请求
-router.post('/logout', function (req, res) {
+router.post('/logout', function(req, res) {
     req.session.user = null;
     return res.status(200).json({
         err_code: 0,
