@@ -3,27 +3,61 @@ let userAvatarImg = document.getElementById('userAvatarImg');
 let imgChoose = document.getElementById('imgChoose');
 
 
+let currentUser = sessionStorage.getItem('currentUser');
+currentUser = JSON.parse(currentUser);
+
 btn_back.onclick = function(event) {
     event.preventDefault();
     self.location = '/index';
 };
+
+let index = 0;
+
+function nowImg() {
+    // let imgList = document.getElementById('imgList');
+    let imgs = imgList.getElementsByTagName('img');
+    for (i = 0; i < imgs.length; i++) {
+        var src = imgs[i].src;
+        if (src === currentUser.avatar) {
+            index = i;
+            imgs[i].classList.add('now');
+        } else {
+            imgs[i].classList.remove('now');
+        }
+    }
+}
+
+function selectImg() {
+    let imgs = imgList.getElementsByTagName('img');
+    imgList.addEventListener('click', function(event) {
+        let target = event.target;
+        if (target.tagName != 'IMG') {
+            return;
+        }
+        imgs[index].classList.remove('now');
+        target.classList.add('now');
+        for (i = 0; i < imgs.length; i++) {
+            if (imgs[i] === target) {
+                index = i;
+            }
+        }
+    });
+}
 
 userAvatarImg.onclick = function(event) {
     imgChoose.innerHTML = '';
     let html = `
     <label class="weui-cell weui-cell_active">
         <div class="weui-cell__hd"><span class="weui-label">选择头像</span></div>
-        <div class="weui-cell__bd">
+        <div class="weui-cell__bd" id="imgList">
             <img class="imgList" src="images/1.jpg">
             <img class="imgList" src="images/2.jpg">
-            <img class="imgList" src="images/3.jpg">
-            <img class="imgList" src="images/4.jpg">
-            <img class="imgList" src="images/5.jpg">
-            <img class="imgList" src="images/6.jpg">
         </div>
     </label>
     `;
     imgChoose.innerHTML += html;
+    nowImg();
+    selectImg();
 };
 
 function change() {
@@ -34,9 +68,14 @@ function change() {
     btn_update.onclick = function(event) {
         event.preventDefault();
         let nickname = nicknameInput.value.trim();
-        //暂时不做avatar
-        let hostname = 'http://' + window.document.location.host;
-        let avatar = hostname + '/images/1.jpg';
+        try {
+            let imgs = imgList.getElementsByTagName('img');
+            avatar = imgs[index].src;
+
+        } catch (error) {
+            avatar = currentUser.avatar;
+        }
+
         if (!nickname) {
             return alert('用户名不能为空');
         }
@@ -45,6 +84,10 @@ function change() {
         if (!password) {
             return alert('密码不能为空');
         }
+        currentUser.nickname = nickname;
+        currentUser.password = password;
+        currentUser.avatar = avatar;
+        sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
         axios.post('/info', {
             nickname,
             password,

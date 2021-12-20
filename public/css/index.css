@@ -1,7 +1,7 @@
 /*登录界面*/
 
 body {
-    background-color: var(--weui-BG-0);
+    background-color: var(--weui-BG-1);
 }
 
 .main {
@@ -85,6 +85,7 @@ body {
 /*聊天框*/
 
 .chatContainer {
+    background-color: var(--weui-BG-0);
     margin: auto;
     width: 1000px;
     display: flex;

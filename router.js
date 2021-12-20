@@ -108,7 +108,7 @@ router.post('/info', async function(req, res) {
         });
     }
 
-    User.remove({ nickname: user.nickname }, function(err, res) {
+    User.deleteMany({ nickname: user.nickname }, function(err, res) {
         if (res) {
             console.log('删除成功');
         }

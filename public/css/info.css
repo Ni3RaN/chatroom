@@ -16,7 +16,6 @@
 
 .imgList {
     margin-top: 5px;
-    border: 1px solid gray;
     justify-content: space-around;
     flex-wrap: wrap;
     padding: 5px;
@@ -25,4 +24,8 @@
     margin: 5px;
     cursor: pointer;
     box-sizing: border-box;
+}
+
+.now {
+    border: 3px solid var(--weui-FG-0);
 }
