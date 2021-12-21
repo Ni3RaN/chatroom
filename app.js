@@ -21,23 +21,23 @@ app.use(session({
     saveUninitialized: true
 }));
 
-app.get('/',function(req,res){
+app.get('/', function(req, res) {
     res.redirect('/index');
 });
 
-app.use('/',express.static('./public'));
+app.use('/', express.static('./public'));
 // 记录所有已经登录的用户
 let users = [];
 
 
 app.use(router);
 
-server.listen(1625, function () {
+server.listen(1625, function() {
     console.log('在1625端口上启动');
 });
 
 // 只要有用户连接，就会触发connection事件，并为每个用户创建独一无二的连接socket（也就是socket对象是每个用户都有的）
-io.on('connection', function (socket) {
+io.on('connection', function(socket) {
     console.log('新用户连接了', socket.id);
 
     /**
@@ -46,7 +46,7 @@ io.on('connection', function (socket) {
      * 1.广播消息，告诉所有用户有新用户进来了。使用io.emit()
      * 2.广播消息，将当前的用户列表发送给所有用户
      * */
-    socket.on('loginSuccess', function (user) {
+    socket.on('loginSuccess', function(user) {
         users.push(user);
         console.log(users);
         // 告诉所有用户有新用户进来了，广播消息
@@ -62,7 +62,7 @@ io.on('connection', function (socket) {
     });
 
     // 监听用户断开连接，disconnect事件是系统提前定义好的，不是自己定义的
-    socket.on('disconnect', function () {
+    socket.on('disconnect', function() {
         console.log('断开连接');
         /**
          * 把当前用户的信息从users中删除掉
@@ -84,7 +84,7 @@ io.on('connection', function (socket) {
     });
 
     // 监听聊天的消息
-    socket.on('sendMessage', function (data) {
+    socket.on('sendMessage', function(data) {
         // 把接收到的消息广播给所有用户
         io.emit('receiveMessage', data);
     });

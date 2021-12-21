@@ -52,6 +52,8 @@ userAvatarImg.onclick = function(event) {
         <div class="weui-cell__bd" id="imgList">
             <img class="imgList" src="images/1.jpg">
             <img class="imgList" src="images/2.jpg">
+            <img class="imgList" src="images/3.jpg">
+            <img class="imgList" src="images/4.jpg">
         </div>
     </label>
     `;
