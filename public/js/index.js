@@ -98,6 +98,19 @@ socket.on('receiveMessage', function(data) {
     // 把接收到的消息显示到聊天窗口中，需要区分这个消息是自己的还是其他人发的
     let sendUser = data.sendUser;
     let html = '';
+    let myDate = new Date();
+
+    console.log(myDate);
+
+    axios.post('/message', {
+        'nickname': sendUser.nickname,
+        'avatar': sendUser.avatar,
+        'message': data.message,
+        'date': myDate
+    }).then(res => {
+        let err_code = res.data.err_code;
+    });
+
     if (sendUser.nickname === currentUser.nickname) {
         // 自己发的消息
         html = `
@@ -191,4 +204,34 @@ sendMessage();
 if (navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)) {
     infoChange();
 }
+
+function getmessage() {
+    axios.post('/getmessage', {}).then(res => {
+        let messages = res.data;
+        for (i = 0; i < messages.length; i++) {
+            let html = ``;
+            if (messages[i].nickname === currentUser.nickname) {
+                // 自己发的消息
+                html = `
+                    <div class="sendMsg">
+                      <div class="sendContent">${messages[i].message}</div>
+                      <img src="${messages[i].avatar}" class="avatarImg">
+                    </div>`;
+            } else {
+                // 别人发的消息
+                html = `<div class="receiveMsg">
+                      <img src="${messages[i].avatar}" class="avatarImg">
+                      <div class="rightStyle">
+                        <span class="nickname">${messages[i].nickname}</span>
+                        <div class="receiveContent">${messages[i].message}</div>
+                      </div>
+                    </div>`;
+            }
+            chatContainer.innerHTML += html;
+            // 发送消息的时候，让聊天页面滚动到底部可视区域
+            scrollIntoView(chatContainer);
+        }
+    })
+}
+getmessage();
 logout();

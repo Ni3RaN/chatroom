@@ -1,4 +1,5 @@
 let express = require('express');
+const Message = require('./models/Message');
 let User = require('./models/User');
 
 let router = express.Router();
@@ -126,6 +127,38 @@ router.post('/info', async function(req, res) {
     return res.status(200).json({
         err_code: 0,
         message: '修改成功'
+    });
+});
+
+//聊天记录持久化
+router.post('/getmessage', async function(req, res) {
+    myDate = new Date();
+
+    myDate.setDate(myDate.getDate() - 1);
+
+    let messages = await Message.find({
+        date: { $gte: myDate }
+    });
+
+    messages = messages.map(messages => ({
+        nickname: messages.nickname,
+        avatar: messages.avatar,
+        message: messages.message,
+        date: messages.date
+    }));
+    return res.status(200).json(messages);
+
+
+});
+
+router.post('/message', async function(req, res) {
+    let body = req.body;
+    console.log('聊天记录：', body);
+    let message = new Message(body);
+    await message.save();
+    return res.status(200).json({
+        err_code: 0,
+        message: '保存成功'
     });
 });
 
