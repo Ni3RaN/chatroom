@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-mongoose.connect('mongodb://localhost/190110910625');
+mongoose.connect('mongodb://localhost/chatroom');
 const messageSchema = new Schema({
     nickname: {
         type: String,

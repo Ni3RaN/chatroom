@@ -1,5 +1,6 @@
 let express = require('express');
 const Message = require('./models/Message');
+const crypto = require('crypto');
 let User = require('./models/User');
 
 let router = express.Router();
@@ -37,6 +38,17 @@ router.get('/login', function(req, res) {
 // 处理登录请求
 router.post('/login', async function(req, res) {
     let body = req.body;
+    let salt = await User.find({
+        nickname: body.nickname,
+    });
+    if (salt.length == 0) {
+        return res.status(200).json({
+            err_code: 1,
+            message: "昵称或密码错误"
+        });
+    }
+    let newPwd = cryptPwd(body.password, salt[0].salt);
+    body.password = newPwd;
     console.log('用户请求登录：', body);
     let user = await User.findOne(body);
     if (!user) {
@@ -72,7 +84,11 @@ router.post('/register', async function(req, res) {
             message: '昵称已存在'
         })
     }
-
+    let createtime = new Date();
+    let salt = createtime + getRandomSalt();
+    let newPwd = cryptPwd(body.password, salt);
+    body.password = newPwd;
+    body.salt = salt;
     let user = new User(body);
     await user.save();
     // req.session.user = user;
@@ -170,5 +186,16 @@ router.post('/logout', function(req, res) {
         message: "已退出"
     })
 });
+
+function getRandomSalt() {
+    return Math.random().toString().slice(2, 5);
+}
+
+function cryptPwd(password, salt) {
+    let saltPassword = password + ':' + salt;
+    let md5 = crypto.createHash('md5');
+    let result = md5.update(saltPassword).digest('hex');
+    return result;
+}
 
 module.exports = router;

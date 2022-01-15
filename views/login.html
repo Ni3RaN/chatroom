@@ -22,43 +22,64 @@
                     <div class="weui-cells__group weui-cells__group_form">
                         <div class="weui-cells">
                             <label for="nickname" class="weui-cell weui-cell_active">
-                <div class="weui-cell__hd"><span class="weui-label">昵称</span></div>
-                <div class="weui-cell__bd">
-                  <input class="weui-input" id="nickname" type="text" name="nickname" placeholder="昵称"
-                    autocomplete="off" />
-                </div>
-              </label>
+                                <div class="weui-cell__hd">
+                                    <span class="weui-label">昵称</span>
+                                </div>
+                                <div class="weui-cell__bd">
+                                    <input class="weui-input" id="nickname" type="text" name="nickname" placeholder="昵称" autocomplete="off" />
+                                </div>
+                            </label>
                             <label for="password" class="weui-cell weui-cell_active">
-                <div class="weui-cell__hd"><span class="weui-label">密码</span></div>
-                <div class="weui-cell__bd">
-                  <input class="weui-input" id="password" type="password" name="pasword" placeholder="密码" />
+                                <div class="weui-cell__hd"><span class="weui-label">密码</span></div>
+                                <div class="weui-cell__bd">
+                                    <input class="weui-input" id="password" type="password" name="pasword" placeholder="密码" />
+                                </div>
+                            </label>
+                        </div>
+                    </div>
                 </div>
-              </label>
+                <div id="dialogs">
+                    <div class="js_dialog" role="dialog" aria-hidden="true" aria-modal="true" aria-labelledby="js_title1" id="iosDialog1" style="display: none;">
+                        <div class="weui-mask"></div>
+                        <div class="weui-dialog">
+                            <div class="weui-dialog__bd">用户名或密码为空</div>
+                            <div class="weui-dialog__ft">
+                                <a role="button" href="javascript:" class="weui-dialog__btn weui-dialog__btn_primary">知道了</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="js_dialog" role="dialog" aria-hidden="true" aria-modal="true" aria-labelledby="js_title2" id="iosDialog2" style="display: none;">
+                        <div class="weui-mask"></div>
+                        <div class="weui-dialog">
+                            <div class="weui-dialog__bd">用户名或密码错误</div>
+                            <div class="weui-dialog__ft">
+                                <a role="button" href="javascript:" class="weui-dialog__btn weui-dialog__btn_primary">知道了</a>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="weui-form__tips-area">
                 </div>
                 <div class="weui-form__opr-area">
-                    <button type="submit" class="weui-btn weui-btn_primary" id="btn_login">登录</a>
+                    <button type="submit" class="weui-btn weui-btn_primary" id="btn_login">登录</button>
+                </div>
+                <div class="weui-form__tips-area">
+                    <p class="weui-form__tips">没有账号?
+                        <a href="/register">点击注册</a>
+                    </p>
+                </div>
+                <div class="weui-form__extra-area">
+                    <div class="weui-footer">
+                        <p class="weui-footer__text">Copyright © NieRaN</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="weui-form__tips-area">
-          <p class="weui-form__tips">
-            没有账号?
-            <a href="/register">点击注册</a>
-          </p>
-        </div>
-        <div class="weui-form__extra-area">
-          <div class="weui-footer">
-            <p class="weui-footer__text">Copyright © NieRaN</p>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
-  <script src="/socket.io/socket.io.js"></script>
-  <script src="js/axios.min.js"></script>
-  <script src="js/login.js"></script>
+    <script src="js/jquery-3.5.1.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/axios.min.js"></script>
+    <script src="js/login.js"></script>
 </body>
 
 </html>
