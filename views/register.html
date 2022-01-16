@@ -48,7 +48,7 @@
                 <div class="weui-form__tips-area">
                 </div>
                 <div class="weui-form__opr-area">
-                    <button type="submit" class="weui-btn weui-btn_primary" id="btn_register">注册</a>
+                    <button type="submit" class="weui-btn weui-btn_primary" id="btn_register">注册</button>
                 </div>
                 <div class="weui-form__tips-area">
                     <p class="weui-form__tips">
@@ -61,9 +61,57 @@
                         <p class="weui-footer__text">Copyright © NieRaN</p>
                     </div>
                 </div>
+                <div id="dialogs">
+                    <div class="js_dialog" role="dialog" aria-hidden="true" aria-modal="true" aria-labelledby="js_title1" id="iosDialog1" style="display: none;">
+                        <div class="weui-mask"></div>
+                        <div class="weui-dialog">
+                            <div class="weui-dialog__bd">用户名不能为空</div>
+                            <div class="weui-dialog__ft">
+                                <a role="button" href="javascript:" class="weui-dialog__btn weui-dialog__btn_primary">知道了</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="js_dialog" role="dialog" aria-hidden="true" aria-modal="true" aria-labelledby="js_title2" id="iosDialog2" style="display: none;">
+                        <div class="weui-mask"></div>
+                        <div class="weui-dialog">
+                            <div class="weui-dialog__bd">密码不能为空</div>
+                            <div class="weui-dialog__ft">
+                                <a role="button" href="javascript:" class="weui-dialog__btn weui-dialog__btn_primary">知道了</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="js_dialog" role="dialog" aria-hidden="true" aria-modal="true" aria-labelledby="js_title3" id="iosDialog3" style="display: none;">
+                        <div class="weui-mask"></div>
+                        <div class="weui-dialog">
+                            <div class="weui-dialog__bd">用户名已存在</div>
+                            <div class="weui-dialog__ft">
+                                <a role="button" href="javascript:" class="weui-dialog__btn weui-dialog__btn_primary">知道了</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="js_dialog" role="dialog" aria-hidden="true" aria-modal="true" aria-labelledby="js_title4" id="iosDialog4" style="display: none;">
+                        <div class="weui-mask"></div>
+                        <div class="weui-dialog">
+                            <div class="weui-dialog__bd">密码不符合要求，需要长度大于6位小于20位，只能包含数字，字母和下划线</div>
+                            <div class="weui-dialog__ft">
+                                <a role="button" href="javascript:" class="weui-dialog__btn weui-dialog__btn_primary">知道了</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="js_dialog" role="dialog" aria-hidden="true" aria-modal="true" aria-labelledby="js_title5" id="iosDialog5" style="display: none;">
+                        <div class="weui-mask"></div>
+                        <div class="weui-dialog">
+                            <div class="weui-dialog__bd">输入的密码不同</div>
+                            <div class="weui-dialog__ft">
+                                <a role="button" href="javascript:" class="weui-dialog__btn weui-dialog__btn_primary">知道了</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    <script src="js/jquery-3.5.1.js"></script>
     <script src="js/axios.min.js"></script>
     <script src="js/register.js"></script>
 </body>

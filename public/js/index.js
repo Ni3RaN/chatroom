@@ -14,6 +14,12 @@ let device_icon = document.getElementById('device-icon');
 
 let menus = document.getElementById('menus');
 
+$('#dialogs').on('click', '.weui-dialog__btn', function() {
+    $(this).parents('.js_dialog').fadeOut(200);
+    $(this).parents('.js_dialog').attr('aria-hidden', 'true');
+    $(this).parents('.js_dialog').removeAttr('tabindex');
+});
+
 //适配移动端
 if (navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)) {
     user_list.remove();
@@ -150,7 +156,12 @@ function getMessage(element) {
     }
     // console.log(textareaMsg);
     if (!value) {
-        return alert('消息不能为空');
+        var $iosDialog1 = $('#iosDialog1');
+        $iosDialog1.fadeIn(200);
+        $iosDialog1.attr('aria-hidden', 'false');
+        $iosDialog1.attr('tabindex', '0');
+        $iosDialog1.trigger('focus');
+        return;
     }
 
     // 把消息发给服务器
